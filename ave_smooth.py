@@ -6,8 +6,6 @@ im = misc.imread('lena.png')
 height, width = im.shape
 plt.imshow(im, cmap=plt.cm.gray)
 value = [0.0] * 9
-temp = [0.0] * 9
-seq = [0] * 9
 average = np.zeros((height, width))
 for i in range(height):
     for j in range(width):
@@ -23,6 +21,7 @@ for i in range(height):
             value[8] = im[i + 1][j + 1]
             for n in range(9):
                 average[i][j] += np.int(value[n])
+            average[i][j] = average[i][j] / 9
         except:
             average[i][j] = im[i][j]
 plt.imshow(average, cmap=plt.cm.gray)
