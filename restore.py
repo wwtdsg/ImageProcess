@@ -74,6 +74,6 @@ def smooth(im):  # 图像均值平滑
                 average[i][j] = im[i][j]
     return average
 
-res = smooth(filling(recover(im)))
+res = smooth(filling(recover(im)))  # 这里可以选择[smooth[filling[recover]]]的图像处理组合
 plt.imshow(res, cmap=plt.cm.gray)
 plt.show()
