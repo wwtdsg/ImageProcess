@@ -1,31 +1,32 @@
+# -*- coding utf-8 -*-
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import misc
 import Image
 from math import sqrt, floor
 
-im = Image.open('0.jpg')
+im = Image.open('1.jpg')
 im = im.convert('L')
-im.save('00.jpg')
-im = misc.imread('00.jpg')
+im.save('11.jpg')
+im = misc.imread('11.jpg')
 height, width = im.shape  # (480, 640)
 
 
-def recover(im):
+def recover(im):  # 恢复畸变算法
     res = np.zeros((height, width))
     for j in range(height):
         for i in range(width):
-            ch = pow((i - 320.0) / 320.0, 2) + pow((j - 240.0) / 240, 2)
+            ch = pow((2.0 * i - width) / width, 2) + pow((2.0 * j - height) / height, 2)
             if ch < 1:
-                temp = 320.0 * (j - 240) / sqrt(640.0 * i - pow(i, 2))
-                y = 240.0 + temp
+                temp = width / 2 * (j - height / 2) / sqrt(width * i - pow(i, 2))
+                y = height / 2 + temp
                 x = i
                 y = floor(y)
                 res[y][x] = im[j][i]
     return res
 
 
-def filling(im):
+def filling(im):  # 填充空白像素点
     value = [0.0] * 9
     average = np.zeros((height, width))
     for i in range(height):
@@ -43,7 +44,6 @@ def filling(im):
                     value[6] = average[i - 1][j + 2]
                     value[7] = average[i - 1][j + 3]
                     value[8] = average[i - 1][j + 4]
-#                    print value[0], value[1], value[2], value[3], value[4], value[5], value[6], value[7], value[8]
                     for n in range(9):
                         average[i][j] += np.int(value[n])
                     average[i][j] = average[i][j] / 9
@@ -52,7 +52,7 @@ def filling(im):
     return average
 
 
-def smooth(im):
+def smooth(im):  # 图像均值平滑
     value = [0.0] * 9
     average = np.zeros((height, width))
     for i in range(height):
