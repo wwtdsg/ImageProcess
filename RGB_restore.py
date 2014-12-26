@@ -73,7 +73,7 @@ def smooth(im):
                     average[i][j][n] = im[i][j][n]
     return average
 
-res = filling(recover(im))
+res = filling(recover(im))  #这里可以选择平滑、填充和恢复的函数组合
 plt.figure(1)
 ax1 = plt.subplot(121)
 ax2 = plt.subplot(122)
