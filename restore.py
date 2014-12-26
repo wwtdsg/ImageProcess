@@ -1,14 +1,14 @@
-# -*- coding utf-8 -*-
+# -*- coding: utf-8 -*-
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import misc
 import Image
 from math import sqrt, floor
 
-im = Image.open('1.jpg')
+im = Image.open('0.jpg')
 im = im.convert('L')
-im.save('11.jpg')
-im = misc.imread('11.jpg')
+im.save('00.jpg')
+im = misc.imread('00.jpg')
 height, width = im.shape  # (480, 640)
 
 
