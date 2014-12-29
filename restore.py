@@ -2,12 +2,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import misc
-import Image
 from math import sqrt, floor
 
-im = Image.open('0.jpg')
-im = im.convert('L')
-im.save('00.jpg')
 im = misc.imread('00.jpg')
 height, width = im.shape  # (480, 640)
 
@@ -18,8 +14,8 @@ def recover(im):  # 恢复畸变算法
         for i in range(width):
             ch = pow((2.0 * i - width) / width, 2) + pow((2.0 * j - height) / height, 2)
             if ch < 1:
-                temp = width / 2 * (j - height / 2) / sqrt(width * i - pow(i, 2))
-                y = height / 2 + temp
+                temp = width / 2.0 * (j - height / 2.0) / sqrt(width * i - pow(i, 2.0))
+                y = height / 2.0 + temp
                 x = i
                 y = floor(y)
                 res[y][x] = im[j][i]
@@ -46,7 +42,7 @@ def filling(im):  # 填充空白像素点
                     value[8] = average[i - 1][j + 4]
                     for n in range(9):
                         average[i][j] += np.int(value[n])
-                    average[i][j] = average[i][j] / 9
+                    average[i][j] = average[i][j] / 9.0
                 except:
                     average[i][j] = im[i][j]
     return average
@@ -69,7 +65,7 @@ def smooth(im):  # 图像均值平滑
                 value[8] = im[i + 1][j + 1]
                 for n in range(9):
                     average[i][j] += np.int(value[n])
-                average[i][j] = average[i][j] / 9
+                average[i][j] = average[i][j] / 9.0
             except:
                 average[i][j] = im[i][j]
     return average
