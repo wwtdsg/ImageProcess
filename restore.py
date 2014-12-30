@@ -32,7 +32,7 @@ def filling(im):  # 填充空白像素点
             if im[i][j] == 0:
                 try:
                     value[0] = average[i - 1][j - 1]
-                    value[5] = average[i - 1][j - 2]
+                    value[1] = average[i - 1][j - 2]
                     value[2] = average[i - 1][j - 3]
                     value[3] = average[i - 1][j - 4]
                     value[4] = average[i - 1][j - 5]
